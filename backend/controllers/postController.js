@@ -1,10 +1,12 @@
 const Post = require("../models/postModel");
 
 const addPost = async (req, res) => {
-  const { title, price } = req.body;
+  const { title, price, description } = req.body;
   try {
+    console.log(price);
     const newPost = await Post.create({
       title: title,
+      description: description,
       price: price,
       userId: req.user,
     });
@@ -28,7 +30,7 @@ const getAllPosts = async (req, res) => {
 const getAllMyPosts = async (req, res) => {
   try {
     const myPosts = await Post.find({ userId: req.user }).sort({ _id: -1 });
-
+    console.log(myPosts);
     res.json(myPosts);
   } catch (e) {
     res.status(400).json({ error: e.message });

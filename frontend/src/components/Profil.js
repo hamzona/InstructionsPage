@@ -1,40 +1,53 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { usePostContext } from "../hooks/usePostContext";
 import { useMyPostsContext } from "../hooks/useMyPostsContext";
+import ProfilCss from "../styles/profil.module.css";
 import Posts from "./Posts";
 
 export default function Profil() {
-  const [text, setText] = useState("");
   const { state, dispatch } = useAuthContext();
-  const { dispatch: updatePosts } = usePostContext();
-  const { state: myPosts, dispatch: updateMyPosts } = useMyPostsContext();
 
+  const { state: myPosts } = useMyPostsContext();
+  const navigate = useNavigate();
   function hendleClick() {
     localStorage.removeItem("user");
     dispatch({ type: "logout" });
+    navigate("/");
   }
 
   return (
-    <div>
-      <Link to="/home">Home</Link>
-      <h1>Profil</h1>
-      {state.user && <div>{state.user.email}</div>}
-      <button
-        onClick={() => {
-          hendleClick();
-        }}
-      >
-        Log out
-      </button>
-      <br></br>
-      <Link to="/input">upload new post</Link>
-      <h2>My posts:</h2>
-      {myPosts &&
-        myPosts.map((item) => {
-          return <Posts key={item._id} item={item} />;
-        })}
+    <div className={ProfilCss.container}>
+      <div className={ProfilCss.profilContainer}>
+        <Link className={ProfilCss.back} to="/">
+          BACK
+        </Link>
+
+        {state.user && <div className={ProfilCss.name}> {state.user.name}</div>}
+        {state.user && (
+          <div className={ProfilCss.email}>Email: {state.user.email}</div>
+        )}
+
+        <button
+          className="logout"
+          onClick={() => {
+            hendleClick();
+          }}
+        >
+          Log out
+        </button>
+      </div>
+
+      <div className={ProfilCss.postsContainer}>
+        <Link className={ProfilCss.inputLink} to="/input">
+          Upload new post
+        </Link>
+        <div className={ProfilCss.titleMyPosts}>My posts:</div>
+        {myPosts &&
+          myPosts.map((item) => {
+            return <Posts key={item._id} item={item} />;
+          })}
+      </div>
     </div>
   );
 }

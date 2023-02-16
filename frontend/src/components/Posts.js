@@ -4,7 +4,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useMyPostsContext } from "../hooks/useMyPostsContext";
 import { usePostContext } from "../hooks/usePostContext";
 //import { useNavigate } from "react-router-dom";
-
+import PostsCss from "../styles/posts.module.css";
 export default function Posts({ item }) {
   const { state } = useAuthContext();
   const { dispatch: updateMyPosts } = useMyPostsContext();
@@ -30,7 +30,7 @@ export default function Posts({ item }) {
 
     if (res.ok) {
       updateMyPosts({ type: "deleteMyPost", payload: json });
-      updatePosts({ type: "delete", payload: json });
+      updatePosts({ type: "deletePost", payload: json });
     }
   }
 
@@ -39,11 +39,18 @@ export default function Posts({ item }) {
   // }
 
   return (
-    <div>
-      {item.title}
-      {"   "}
-      {item.price + "Km"}
-      <button onClick={() => hendleDeleteClick()}>DELETE</button>
+    <div className={PostsCss.container}>
+      <div className={PostsCss.postContainer}>
+        <div className={PostsCss.postData}>
+          {item.title && <div> Title: {item.title}</div>}
+          {item.description && <div>Description: {item.description}</div>}
+          {item.price && <div>Price: {item.price}KM</div>}
+        </div>
+
+        <button className={PostsCss.button} onClick={() => hendleDeleteClick()}>
+          DELETE
+        </button>
+      </div>
       {/* <button onClick={() => handleUpdateClick()}>UPDATE</button> */}
     </div>
   );

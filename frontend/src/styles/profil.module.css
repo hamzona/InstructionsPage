@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.back {
+  text-decoration: none;
+  color: black;
+  font-size: 30px;
+}
+.profilContainer {
+  height: 100vh;
+  border-right: 3px solid black;
+  width: 400px;
+}
+.postsContainer {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 50px 50px;
+}
+.titleMyPosts {
+  font-size: 50px;
+  margin: 20px 0px;
+}
+.inputLink {
+  text-decoration: none;
+  font-size: 20px;
+}
+.email {
+  font-size: 20px;
+}
+.name {
+  font-size: 40px;
+}
