@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100%;
+  box-sizing: border-box;
+}
+.homeNav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: antiquewhite;
+  width: 100vw;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  z-index: 2;
+  border-bottom: solid black 5px;
+}
+.loginSingupCont {
+  margin-left: 50px;
+  font-size: 30px;
+}
+.loginLink {
+  text-decoration: none;
+}
+.singupLink {
+  text-decoration: none;
+}
+
+.posts {
+  height: 10000px;
+}
+
+.posts {
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(4, 500px);
+  grid-gap: 20px;
+  grid-template-rows: auto;
+
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.profilLink {
+  margin-left: 100px;
+  text-decoration: none;
+  font-size: 30px;
+}
+.searchBar {
+  margin-top: 100px;
+  background-color: aqua;
+  width: 100vw;
+  height: 100px;
+}

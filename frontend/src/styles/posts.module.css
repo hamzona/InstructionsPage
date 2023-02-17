@@ -30,6 +30,7 @@ body {
 }
 .postData {
   margin: 0px 0px;
+  font-size: 25px;
 }
 .button:focus {
   color: red;

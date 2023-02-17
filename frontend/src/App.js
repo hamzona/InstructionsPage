@@ -6,22 +6,35 @@ import NoUser from "./components/NoUser";
 import Profil from "./components/Profil";
 import { Singup } from "./components/Singup";
 import { useAuthContext } from "./hooks/useAuthContext";
-
+import useSinglePostContext from "./hooks/useSinglePostContext";
+import SinglePost from "./components/SinglePost";
 function App() {
   const { state } = useAuthContext();
+  const { singlePost } = useSinglePostContext();
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path="/profil"
-          element={!state.user ? <Navigate to="/noUser" /> : <Profil />}
+          element={!state.user ? <Navigate to="/" /> : <Profil />}
         />
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            singlePost === null ? <Home /> : <Navigate to="/singlePost" />
+          }
+        />
         <Route path="/input" element={<Input />} />
         <Route
           path="/login"
           element={state.user !== null ? <Navigate to="/" /> : <Login />}
         />
+
+        <Route
+          path="/singlePost"
+          element={singlePost === null ? <Navigate to="/" /> : <SinglePost />}
+        />
+
         <Route path="noUser" element={<NoUser />} />
         <Route
           path="/singup"

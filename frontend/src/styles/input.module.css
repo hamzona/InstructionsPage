@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.back {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  text-decoration: none;
+  font-size: 25px;
+}
+
+.formContainer {
+  height: 650px;
+  width: 700px;
+  border-radius: 20px;
+  padding: 50px;
+  border: solid 2px black;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+
+  position: relative;
+  background-color: antiquewhite;
+  padding-bottom: 100px;
+}
+.input {
+  height: 30px;
+  width: 350px;
+  display: block;
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 10px;
+}
+.inputPrice {
+  height: 30px;
+  width: 150px;
+  display: block;
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 10px;
+}
+.label {
+  font-size: 25px;
+}
+.inputDescription {
+  height: 150px;
+  width: 600px;
+  text-align: left;
+  resize: none;
+  display: block;
+  font-size: 25px;
+}
+.inputContainer {
+  margin: 20px 0px;
+}
+.button {
+  position: absolute;
+  bottom: 50px;
+  left: 320px;
+  height: 50px;
+  width: 150px;
+}
+.title {
+  font-size: 50px;
+}
+.error {
+  color: red;
+  font-size: 20px;
+}
+.priceValuteCont {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 25px;
+}

@@ -12,9 +12,10 @@ const authJwt = async (req, res, next) => {
     }
     const token = authorization.split(" ")[1];
     const { _id } = await jwt.verify(token, process.env.SECRET);
-    const userId = await Auth.findById({ _id }).select({ _id });
+    const user = await Auth.findById({ _id });
 
-    req.user = userId._id;
+    req.user = user._id;
+    req.userName = user.name;
 
     next();
   } catch (e) {

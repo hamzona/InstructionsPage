@@ -30,7 +30,9 @@ export function Login() {
           }}
         >
           <div className={LoginCSS["input-container"]}>
-            <label htmlFor="email">Email: </label>
+            <label className={LoginCSS.label} htmlFor="email">
+              Email:{" "}
+            </label>
             <input
               id="email"
               className={LoginCSS.loginInput}
@@ -41,7 +43,9 @@ export function Login() {
             />
           </div>
           <div className={LoginCSS["input-container"]}>
-            <label htmlFor="password">Password: </label>
+            <label className={LoginCSS.label} htmlFor="password">
+              Password:{" "}
+            </label>
             <input
               id="password"
               className={LoginCSS.loginInput}

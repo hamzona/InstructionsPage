@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useMyPostsContext } from "../hooks/useMyPostsContext";
 import ProfilCss from "../styles/profil.module.css";
-import Posts from "./Posts";
+import MyPosts from "./MyPosts";
 
 export default function Profil() {
   const { state, dispatch } = useAuthContext();
@@ -25,11 +25,11 @@ export default function Profil() {
 
         {state.user && <div className={ProfilCss.name}> {state.user.name}</div>}
         {state.user && (
-          <div className={ProfilCss.email}>Email: {state.user.email}</div>
+          <div className={ProfilCss.email}>email: {state.user.email}</div>
         )}
 
         <button
-          className="logout"
+          className={ProfilCss.logout}
           onClick={() => {
             hendleClick();
           }}
@@ -45,7 +45,7 @@ export default function Profil() {
         <div className={ProfilCss.titleMyPosts}>My posts:</div>
         {myPosts &&
           myPosts.map((item) => {
-            return <Posts key={item._id} item={item} />;
+            return <MyPosts key={item._id} item={item} />;
           })}
       </div>
     </div>

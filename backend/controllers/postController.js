@@ -2,9 +2,14 @@ const Post = require("../models/postModel");
 
 const addPost = async (req, res) => {
   const { title, price, description } = req.body;
+
   try {
-    console.log(price);
+    console.log(title);
+    if (!title) {
+      throw Error("Title is required");
+    }
     const newPost = await Post.create({
+      userName: req.userName,
       title: title,
       description: description,
       price: price,
@@ -30,7 +35,7 @@ const getAllPosts = async (req, res) => {
 const getAllMyPosts = async (req, res) => {
   try {
     const myPosts = await Post.find({ userId: req.user }).sort({ _id: -1 });
-    console.log(myPosts);
+
     res.json(myPosts);
   } catch (e) {
     res.status(400).json({ error: e.message });

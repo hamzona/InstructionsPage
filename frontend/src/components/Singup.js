@@ -28,7 +28,9 @@ export function Singup() {
           }}
         >
           <div className={SingupCSS["input-container"]}>
-            <label htmlFor="name">Name: </label>
+            <label className={SingupCSS.label} htmlFor="name">
+              Name:{" "}
+            </label>
             <input
               id="name"
               className={SingupCSS.input}
@@ -39,7 +41,9 @@ export function Singup() {
             />
           </div>
           <div className={SingupCSS["input-container"]}>
-            <label htmlFor="email">Email: </label>
+            <label className={SingupCSS.label} htmlFor="email">
+              Email:{" "}
+            </label>
             <input
               id="email"
               className={SingupCSS.input}
@@ -50,7 +54,9 @@ export function Singup() {
             />
           </div>
           <div className={SingupCSS["input-container"]}>
-            <label htmlFor="password">Password: </label>
+            <label className={SingupCSS.label} htmlFor="password">
+              Password:{" "}
+            </label>
             <input
               id="password"
               className={SingupCSS.input}

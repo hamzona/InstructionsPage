@@ -6,7 +6,8 @@ body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
+  box-sizing: border-box;
 }
 .container {
   width: 100vw;
@@ -19,19 +20,23 @@ body {
 }
 .back {
   text-decoration: none;
-  color: black;
+
   font-size: 30px;
+  margin-bottom: 50px;
 }
 .profilContainer {
   height: 100vh;
   border-right: 3px solid black;
   width: 400px;
+  box-sizing: border-box;
+  padding: 30px 30px;
 }
 .postsContainer {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
   padding: 50px 50px;
+  overflow-y: auto;
 }
 .titleMyPosts {
   font-size: 50px;
@@ -42,8 +47,14 @@ body {
   font-size: 20px;
 }
 .email {
-  font-size: 20px;
+  font-size: 30px;
+  margin: 20px 0px;
 }
 .name {
   font-size: 40px;
+  margin: 30px 0px;
+}
+.logout {
+  width: 200px;
+  height: 50px;
 }

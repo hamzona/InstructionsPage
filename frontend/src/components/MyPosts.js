@@ -5,7 +5,7 @@ import { useMyPostsContext } from "../hooks/useMyPostsContext";
 import { usePostContext } from "../hooks/usePostContext";
 //import { useNavigate } from "react-router-dom";
 import PostsCss from "../styles/posts.module.css";
-export default function Posts({ item }) {
+export default function MyPosts({ item }) {
   const { state } = useAuthContext();
   const { dispatch: updateMyPosts } = useMyPostsContext();
   const { dispatch: updatePosts } = usePostContext();

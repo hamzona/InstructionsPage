@@ -2,30 +2,39 @@ import React from "react";
 import { usePostContext } from "../hooks/usePostContext";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
+import HomePosts from "./HomePosts";
+import HomeCss from "../styles/home.module.css";
 function Home() {
   const { state } = usePostContext();
   const { state: stateUser } = useAuthContext();
-
   return (
-    <div>
-      <div>
+    <div className={HomeCss.container}>
+      <div className={HomeCss.homeNav}>
         {stateUser.user !== null ? (
-          <Link to="/profil">My profil</Link>
+          <Link className={HomeCss.profilLink} to="/profil">
+            My profil: {stateUser.user.name}
+          </Link>
         ) : (
-          <div>
-            <Link to="/login">login</Link>
+          <div className={HomeCss.loginSingupCont}>
+            <Link className={HomeCss.loginLink} to="/login">
+              login
+            </Link>
             {"  "}
-            <Link to="/singup">singup</Link>
+            <Link className={HomeCss.singupLink} to="/singup">
+              singup
+            </Link>
           </div>
         )}
       </div>
-      <hr></hr>
-      <h1>Home</h1>
-      {state &&
-        state.map((item) => {
-          //console.log(item);
-          return <div key={item._id}>{item.title}</div>;
-        })}
+      <div className={HomeCss.searchBar}>
+        <input type="text" />
+      </div>
+      <div className={HomeCss.posts}>
+        {state &&
+          state.map((item) => {
+            return <HomePosts key={item._id} item={item} />;
+          })}
+      </div>
     </div>
   );
 }

@@ -20,3 +20,6 @@ mongoose.connect(process.env.MONGO_URL).then(
     console.log(process.env.PORT);
   })
 );
+mongoose.connection.on("open", () => {
+  console.log("Connected");
+});
