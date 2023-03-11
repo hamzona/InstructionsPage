@@ -2,7 +2,6 @@ const express = require("express");
 const route = express.Router();
 const {
   addPost,
-  getAllPosts,
   deletePost,
   updatePost,
   getAllMyPosts,
@@ -10,13 +9,14 @@ const {
 
 //middleware
 const authJwt = require("../middleware/authJwtMiddleware");
+const { pagination } = require("../middleware/pagination");
 
 //get all
-route.get("/allPosts", getAllPosts);
+route.get("/allPosts", pagination);
 
 //get allMyPosts
-
 route.get("/allMy", authJwt, getAllMyPosts);
+
 // add
 route.post("/add", authJwt, addPost);
 

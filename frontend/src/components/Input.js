@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { usePostContext } from "../hooks/usePostContext";
 import { useMyPostsContext } from "../hooks/useMyPostsContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import InputCss from "../styles/input.module.css";
 
 export default function Input() {
-  const navigate = useNavigate();
   const [data, setData] = useState({});
   const [error, setError] = useState(null);
   const { state } = useAuthContext();
@@ -16,6 +15,7 @@ export default function Input() {
   //POST DATA
   async function hendleSubmit(e) {
     e.preventDefault();
+    console.log(data);
     if (!state.user) {
       return;
     }
@@ -31,6 +31,8 @@ export default function Input() {
         title: data.title,
         price: data.price,
         description: data.description,
+        subject: data.subject,
+        jobType: data.jobType,
       }),
     });
     const json = await res.json();
@@ -42,7 +44,7 @@ export default function Input() {
       updatePosts({ type: "addPost", payload: json });
       updateMyPosts({ type: "addMyPost", payload: json });
       setData("");
-      navigate("/profil");
+      // navigate("/profil");
     }
   }
 
@@ -57,14 +59,16 @@ export default function Input() {
       <Link className={InputCss.back} to="/profil">
         Cancle
       </Link>
-      <div className={InputCss.formContainer}>
+
+      <form
+        className={InputCss.form}
+        onSubmit={(e) => {
+          hendleSubmit(e);
+        }}
+      >
         <div className={InputCss.title}>Input</div>
-        <form
-          className={InputCss.form}
-          onSubmit={(e) => {
-            hendleSubmit(e);
-          }}
-        >
+
+        <div className={InputCss.first}>
           <div className={InputCss.inputContainer}>
             <label className={InputCss.label} htmlFor="title">
               Title:*{" "}
@@ -102,6 +106,8 @@ export default function Input() {
                 className={InputCss.inputPrice}
                 type="number"
                 id="price"
+                min={0}
+                max={1000}
                 value={data.price}
                 onChange={(e) => {
                   hendleChange(e);
@@ -110,12 +116,59 @@ export default function Input() {
               KM
             </div>
           </div>
-          <button className={InputCss.button} type="submit">
-            submit
-          </button>
-          {error && <div className={InputCss.error}>{error}</div>}
-        </form>
-      </div>
+        </div>
+
+        <div className={InputCss.second}>
+          <div className={InputCss.subjectCont}>
+            <label htmlFor="subject" className={InputCss.label}>
+              Subject:{" "}
+            </label>
+            <select
+              className={InputCss.select}
+              id="subject"
+              value={data.subject}
+              onChange={(e) => {
+                hendleChange(e);
+              }}
+            >
+              <option value="matematika">Matematika</option>
+              <option value="bosanski">Bosanski</option>
+              <option value="fizika">Fizika</option>
+              <option value="hemija">Hemija</option>
+              <option value="biologija">Biologija</option>
+              <option value="muzicko">Muzicko</option>
+              <option value="likovno">Likovno</option>
+              <option value="historija">Historija</option>
+              <option value={undefined} selected="selected">
+                unchecked
+              </option>
+            </select>
+          </div>
+
+          <div className={InputCss.jobTypeCont}>
+            <label htmlFor="jobType" className={InputCss.label}>
+              Job-type:{" "}
+            </label>
+            <select
+              className={InputCss.select}
+              id="jobType"
+              value={data.jobType}
+              onChange={(e) => hendleChange(e)}
+              defaultValue={undefined}
+            >
+              <option value="homework">homework</option>
+              <option value="instruction">instruction</option>
+              <option selected="selected" value={undefined}>
+                unchecked
+              </option>
+            </select>
+          </div>
+        </div>
+        <button className={InputCss.button} type="submit">
+          submit
+        </button>
+        {error && <div className={InputCss.error}>{error}</div>}
+      </form>
     </div>
   );
 }

@@ -11,11 +11,14 @@ body {
 }
 
 .container {
+  /* background-color: rgb(72, 83, 148);
+ */
+  padding: 20px;
   height: 300px;
-  width: 500px;
+  width: 400px;
   font-size: 20px;
   border: solid 2px black;
-  margin: 20px 0px;
+  border-radius: 10px;
   box-sizing: border-box;
   position: relative;
   display: block;
@@ -24,6 +27,7 @@ body {
 
 .userName {
   font-size: 30px;
+  border-bottom: solid 2px;
 }
 .title {
   font-size: 50px;

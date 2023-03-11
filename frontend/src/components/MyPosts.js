@@ -44,6 +44,8 @@ export default function MyPosts({ item }) {
         <div className={PostsCss.postData}>
           {item.title && <div> Title: {item.title}</div>}
           {item.description && <div>Description: {item.description}</div>}
+          {item.subject && <div>Subject: {item.subject}</div>}
+          {item.jobType && <div>{item.jobType}</div>}
           {item.price && <div>Price: {item.price}KM</div>}
         </div>
 

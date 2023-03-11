@@ -5,6 +5,8 @@ const Post = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String },
   price: { type: Number },
+  subject: { type: String },
+  jobType: { type: String },
   userId: { type: String, required: true },
 });
 

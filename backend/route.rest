@@ -7,7 +7,7 @@ Authorization: Berar eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2VkNWMzYW
 }
 
 ###
-GET  http://localhost:4000/api/posts/allPosts
+GET  http://localhost:4000/api/posts/allPosts?limit=100
 ###
 GET   http://localhost:4000/api/posts/allMy
 Authorization: Berar eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2VkNWMzYWVlNmFjOWI0NzU4MDUyOTkiLCJpYXQiOjE2NzY1MDAwMjd9.MLXgnHe9Z3F3QljvsSE7FSo0ABHxP4s5G64t6_2dFAs
@@ -49,4 +49,29 @@ Content-Type: application/json
 {
     "email":"hamzaaa@gmail.com",
     "password":"123"
+}
+###
+POST http://localhost:4000/api/comments/add
+Content-Type: application/json
+
+{
+"content":"prejak",
+"postId":"63ef917fcbcf2864f4d073cc",
+"userName":"haks"
+}
+
+###
+POST http://localhost:4000/api/comments/all
+Content-Type: application/json
+
+{
+"postId":"63ef917fcbcf2864f4d073cc"
+}
+
+###
+DELETE http://localhost:4000/api/comments/delete
+Content-Type: application/json
+
+{
+"_id":"640a794e694967e15695e70d"
 }

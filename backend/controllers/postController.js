@@ -1,7 +1,7 @@
 const Post = require("../models/postModel");
 
 const addPost = async (req, res) => {
-  const { title, price, description } = req.body;
+  const { title, price, description, subject, jobType } = req.body;
 
   try {
     console.log(title);
@@ -13,6 +13,8 @@ const addPost = async (req, res) => {
       title: title,
       description: description,
       price: price,
+      subject: subject,
+      jobType: jobType,
       userId: req.user,
     });
 
@@ -21,17 +23,16 @@ const addPost = async (req, res) => {
     res.status(400).json({ error: e.message });
   }
 };
-
+/*
 const getAllPosts = async (req, res) => {
   try {
     const allPosts = await Post.find({}).sort({ _id: -1 });
-
     res.json(allPosts);
   } catch (e) {
     res.status(400).json({ error: e.message });
   }
 };
-
+*/
 const getAllMyPosts = async (req, res) => {
   try {
     const myPosts = await Post.find({ userId: req.user }).sort({ _id: -1 });
@@ -66,7 +67,6 @@ const updatePost = async (req, res) => {
 };
 module.exports = {
   addPost,
-  getAllPosts,
   deletePost,
   updatePost,
   getAllMyPosts,

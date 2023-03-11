@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 export const PostContext = createContext();
 function updateReducer(state, action) {
   switch (action.type) {
@@ -15,20 +15,24 @@ function updateReducer(state, action) {
 }
 export function PostContextProvider({ children }) {
   const [state, dispatch] = useReducer(updateReducer, null);
-
+  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState(1);
   useEffect(() => {
     const getAllPosts = async () => {
-      const res = await fetch("http://localhost:4000/api/posts/allPosts");
+      const res = await fetch(
+        `http://localhost:4000/api/posts/allPosts?page=${page}&limit=16`
+      );
       const json = await res.json();
-
+      console.log(json);
       if (res.ok) {
-        dispatch({ type: "setPosts", payload: json });
+        setPages(json.pages);
+        dispatch({ type: "setPosts", payload: json.data });
       }
     };
     getAllPosts();
-  }, []);
+  }, [page]);
   return (
-    <PostContext.Provider value={{ state, dispatch }}>
+    <PostContext.Provider value={{ state, dispatch, page, setPage, pages }}>
       {children}
     </PostContext.Provider>
   );

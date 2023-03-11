@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { usePostContext } from "../hooks/usePostContext";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import HomePosts from "./HomePosts";
 import HomeCss from "../styles/home.module.css";
+import Pagination from "./Pagination";
+
 function Home() {
   const { state } = usePostContext();
   const { state: stateUser } = useAuthContext();
+  /*
+  const [query, setQuery] = useState("");
+  const [filterWindow, setFilterWindow] = useState(true);
+  /*
+  if (state !== null) {
+    state.forEach((item) => {
+      if (item.title.includes(query)) {
+        console.log(item);
+      }
+    });
+  }*/
+
   return (
     <div className={HomeCss.container}>
       <div className={HomeCss.homeNav}>
@@ -26,15 +40,41 @@ function Home() {
           </div>
         )}
       </div>
-      <div className={HomeCss.searchBar}>
-        <input type="text" />
-      </div>
+
+      {/* <div className={HomeCss.searchBarContainer}>
+        <input
+          className={HomeCss.searchBarInput}
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search"
+        />
+        <button
+          style={{ display: filterWindow ? "block" : "none" }}
+          onClick={() => setFilterWindow(false)}
+        >
+          Filter
+        </button>
+        <form
+          style={{ display: !filterWindow ? "block" : "none" }}
+          onSubmit={(e) => {
+            e.preventDefault();
+            setFilterWindow(true);
+          }}
+        >
+          <input></input>
+          <button type="submit">submit</button>
+        </form>
+      </div> */}
+
       <div className={HomeCss.posts}>
         {state &&
           state.map((item) => {
             return <HomePosts key={item._id} item={item} />;
           })}
       </div>
+
+      <Pagination />
     </div>
   );
 }
