@@ -10,9 +10,9 @@ const {
 //middleware
 const authJwt = require("../middleware/authJwtMiddleware");
 const { pagination } = require("../middleware/pagination");
-
+const { filterPosts } = require("../middleware/filterPosts");
 //get all
-route.get("/allPosts", pagination);
+route.get("/allPosts", filterPosts, pagination);
 
 //get allMyPosts
 route.get("/allMy", authJwt, getAllMyPosts);

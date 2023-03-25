@@ -5,12 +5,12 @@ const pagination = async (req, res, next) => {
     const page = parseInt(req.query.page) || 1;
     const pageSize = parseInt(req.query.limit) || 20;
     const skip = (page - 1) * pageSize;
-    const total = await Post.countDocuments();
 
+    let json = req.data;
+    json = json.slice(skip, pageSize);
+
+    const total = json.length;
     const pages = Math.ceil(total / pageSize);
-
-    let json = await Post.find().skip(skip).limit(pageSize);
-
     if (page > pages) {
       throw Error("Page not found");
     }
