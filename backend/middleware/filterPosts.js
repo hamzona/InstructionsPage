@@ -2,10 +2,13 @@ const Post = require("../models/postModel");
 
 const filterPosts = async (req, res, next) => {
   const search = req.query.search || "";
+  const max = req.query.max || 1000;
+  const min = req.query.min || 0;
   let filters = {};
   Object.keys(req.query).forEach((item) => {
-    if (item === "page" || item === "limit" || item === "search") return;
-    filters[item] = req.query[item];
+    if (item === "subject" || item === "jobType") {
+      filters[item] = req.query[item];
+    }
   });
   console.log(filters);
 
@@ -16,9 +19,13 @@ const filterPosts = async (req, res, next) => {
           { title: { $regex: search, $options: "i" } },
           { description: { $regex: search, $options: "i" } },
           { userName: { $regex: search, $options: "i" } },
+          { subject: { $regex: search, $options: "i" } },
         ],
       },
       filters,
+      {
+        price: { $gt: min, $lt: max },
+      },
     ],
   });
   next();

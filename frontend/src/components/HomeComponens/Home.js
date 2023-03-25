@@ -8,7 +8,7 @@ import Pagination from "./Pagination";
 import Filter from "./Filter";
 import Search from "./Search";
 function Home() {
-  const { state } = usePostContext();
+  const { state, error } = usePostContext();
   const { state: stateUser } = useAuthContext();
 
   return (
@@ -33,10 +33,14 @@ function Home() {
       <Search />
       <Filter />
       <div className={HomeCss.posts}>
-        {state &&
+        {error ? (
+          <div>Error:{error}</div>
+        ) : (
+          state &&
           state.map((item) => {
             return <HomePosts key={item._id} item={item} />;
-          })}
+          })
+        )}
       </div>
 
       <Pagination />

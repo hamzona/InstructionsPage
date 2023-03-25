@@ -17,14 +17,33 @@ export function PostContextProvider({ children }) {
   const [state, dispatch] = useReducer(updateReducer, null);
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(1);
+
+  /*filters */
   const [subjects, setSubjects] = useState([]);
   const [search, setSearch] = useState(null);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(1000);
+  const [jobType, setJobType] = useState(null);
+  const [error, setError] = useState(null);
   useEffect(() => {
-    let params = new URLSearchParams(`page=${page}&limit=16&search=${search}`);
+    let params = new URLSearchParams(
+      `page=${page}&limit=1&search=${search}&min=${minPrice}&max=${maxPrice}&jobType=${jobType}`
+    );
+    if (!jobType) {
+      params.delete("jobType");
+    }
     if (!search) {
       params.delete("search");
     }
-
+    if (!minPrice) {
+      params.delete("min");
+    }
+    if (!maxPrice) {
+      params.delete("max");
+    }
+    if (!jobType) {
+      params.delete("jobType");
+    }
     subjects.forEach((subject) => {
       params.append("subject", subject);
     });
@@ -39,13 +58,27 @@ export function PostContextProvider({ children }) {
       if (res.ok) {
         setPages(json.pages);
         dispatch({ type: "setPosts", payload: json.data });
+      } else {
+        setError(json.error);
       }
     };
     getAllPosts();
-  }, [page, search, subjects]);
+  }, [page, search, subjects, minPrice, maxPrice, jobType]);
   return (
     <PostContext.Provider
-      value={{ state, dispatch, page, setPage, pages, setSubjects, setSearch }}
+      value={{
+        state,
+        dispatch,
+        page,
+        setPage,
+        pages,
+        setSubjects,
+        setSearch,
+        setMaxPrice,
+        setMinPrice,
+        setJobType,
+        error,
+      }}
     >
       {children}
     </PostContext.Provider>
