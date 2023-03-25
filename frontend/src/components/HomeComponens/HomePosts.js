@@ -1,6 +1,6 @@
 import React from "react";
-import HomePostsCss from "../styles/homePosts.module.css";
-import useSinglePostContext from "../hooks/useSinglePostContext";
+import HomePostsCss from "../../styles/homePosts.module.css";
+import useSinglePostContext from "../../hooks/useSinglePostContext";
 //import { useNavigate } from "react-router-dom";
 export default function HomePosts({ item }) {
   const { dispatch } = useSinglePostContext();

@@ -14,7 +14,6 @@ function updateReducer(state, action) {
 export function AuthContextProvider({ children }) {
   const [state, dispatch] = useReducer(updateReducer, { user: null });
   useEffect(() => {
-    console.log("radiiii");
     const setting = async () => {
       const user = await JSON.parse(localStorage.getItem("user"));
 

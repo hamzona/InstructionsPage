@@ -20,7 +20,6 @@ export function CommentContextProvider({ children }) {
   const [comments, dispatch] = useReducer(updateReducer, []);
   const { singlePost } = useSinglePostContext();
   const { state } = useAuthContext();
-  console.log(comments);
   useEffect(() => {
     if (singlePost === null) return;
     async function getData() {

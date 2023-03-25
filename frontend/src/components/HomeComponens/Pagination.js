@@ -1,6 +1,6 @@
 import React from "react";
-import { usePostContext } from "../hooks/usePostContext";
-import PaginationCss from "../styles/pagination.module.css";
+import { usePostContext } from "../../hooks/usePostContext";
+import PaginationCss from "../../styles/pagination.module.css";
 export default function Pagination() {
   const { setPage, page, pages } = usePostContext();
   let middlePagination;
