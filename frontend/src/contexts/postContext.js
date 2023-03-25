@@ -22,12 +22,12 @@ export function PostContextProvider({ children }) {
   const [subjects, setSubjects] = useState([]);
   const [search, setSearch] = useState(null);
   const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(1000);
+  const [maxPrice, setMaxPrice] = useState(10000);
   const [jobType, setJobType] = useState(null);
   const [error, setError] = useState(null);
   useEffect(() => {
     let params = new URLSearchParams(
-      `page=${page}&limit=1&search=${search}&min=${minPrice}&max=${maxPrice}&jobType=${jobType}`
+      `page=${page}&limit=16&search=${search}&min=${minPrice}&max=${maxPrice}&jobType=${jobType}`
     );
     if (!jobType) {
       params.delete("jobType");
@@ -58,6 +58,7 @@ export function PostContextProvider({ children }) {
       if (res.ok) {
         setPages(json.pages);
         dispatch({ type: "setPosts", payload: json.data });
+        setError(null);
       } else {
         setError(json.error);
       }

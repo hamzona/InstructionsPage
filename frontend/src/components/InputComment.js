@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import useSinglePostContext from "../hooks/useSinglePostContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import useCommentContext from "../hooks/useCommentContext";
 import InputCommentCss from "../styles/inputComment.module.css";
 
 function InputComment() {
-  const [text, setText] = useState("");
+  const text = useRef("");
   const { singlePost } = useSinglePostContext();
   const { state } = useAuthContext();
   const userName = state.user.name;
@@ -13,6 +13,7 @@ function InputComment() {
   const { dispatch: upadateComment } = useCommentContext();
   async function postComment(e) {
     e.preventDefault();
+    if (text.current.value === "") return;
     const res = await fetch("http://localhost:4000/api/comments/add", {
       method: "POST",
       headers: {
@@ -20,7 +21,7 @@ function InputComment() {
         Authorization: `Berar ${state.user.token}`,
       },
       body: JSON.stringify({
-        content: text,
+        content: text.current.value,
         postId: singlePost._id,
         userName: userName,
       }),
@@ -28,7 +29,6 @@ function InputComment() {
     const json = await res.json();
     if (await res.ok) {
       upadateComment({ type: "add", payload: json });
-      setText("");
     }
   }
   return (
@@ -40,10 +40,7 @@ function InputComment() {
         <input
           className={InputCommentCss.input}
           type="text"
-          value={text}
-          onChange={(e) => {
-            setText(e.target.value);
-          }}
+          ref={text}
           placeholder="Comment"
         />
         <button className={InputCommentCss.submit} type="submit">

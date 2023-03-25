@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { usePostContext } from "../../hooks/usePostContext";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
@@ -10,7 +10,7 @@ import Search from "./Search";
 function Home() {
   const { state, error } = usePostContext();
   const { state: stateUser } = useAuthContext();
-
+  const [stil, setStil] = useState(true);
   return (
     <div className={HomeCss.container}>
       <div className={HomeCss.homeNav}>
@@ -31,7 +31,17 @@ function Home() {
         )}
       </div>
       <Search />
-      <Filter />
+      <button
+        className={HomeCss.filterBtn}
+        onClick={() =>
+          setStil((prev) => {
+            return !prev;
+          })
+        }
+      >
+        Filter
+      </button>
+      {stil ? "" : <Filter />}
       <div className={HomeCss.posts}>
         {error ? (
           <div>Error:{error}</div>

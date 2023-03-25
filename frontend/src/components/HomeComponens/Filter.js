@@ -36,24 +36,37 @@ export default function Filter() {
     setJobType(jobTypeF);
     setPage(1);
   }
+
+  function resetAll() {
+    setFilterSubject([]);
+    setMinPriceF("");
+    setMaxPriceF("");
+    setJobTypeF("");
+  }
   return (
     <div className={FilterCss.container}>
-      {subjectsConst.map((subject, index) => {
-        return (
-          <div key={index}>
-            {subject}
-            <input
-              type="checkbox"
-              value={subject}
-              onChange={(e) => {
-                hendldeChange(e);
-              }}
-            />
-          </div>
-        );
-      })}
+      {
+        <div>
+          <div className={FilterCss.titles}> Subjects: </div>
+          {subjectsConst.map((subject, index) => {
+            return (
+              <div key={index}>
+                {subject}
+                <input
+                  type="checkbox"
+                  value={subject}
+                  checked={filterSubject.includes(subject)}
+                  onChange={(e) => {
+                    hendldeChange(e);
+                  }}
+                />
+              </div>
+            );
+          })}
+        </div>
+      }
       <div>
-        <div>Price:</div>
+        <div className={FilterCss.titles}>Price:</div>
         <label htmlFor="min">od: </label>
         <input
           type="number"
@@ -75,24 +88,27 @@ export default function Filter() {
         />
       </div>
       <div>
-        <div>Type of work</div>
+        <div className={FilterCss.titles}>Type of work</div>
         <select
+          value={jobTypeF}
           onChange={(e) => {
             console.log(e.target.value);
             setJobTypeF(e.target.value);
           }}
         >
-          {" "}
-          <option value="" selected>
-            unchecked
-          </option>
+          <option value="">unchecked</option>
           <option value="homework">homework</option>
           <option value="instruction">instruction</option>
           unchecked
         </select>
       </div>
 
-      <button onClick={() => hendleClick()}>Apply</button>
+      <button className={FilterCss.apply} onClick={() => hendleClick()}>
+        Apply
+      </button>
+      <button className={FilterCss.reset} onClick={() => resetAll()}>
+        Reset
+      </button>
     </div>
   );
 }

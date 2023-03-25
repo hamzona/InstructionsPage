@@ -2,7 +2,7 @@ const Post = require("../models/postModel");
 
 const filterPosts = async (req, res, next) => {
   const search = req.query.search || "";
-  const max = req.query.max || 1000;
+  const max = req.query.max || 10000;
   const min = req.query.min || 0;
   let filters = {};
   Object.keys(req.query).forEach((item) => {

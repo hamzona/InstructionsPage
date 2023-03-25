@@ -3,10 +3,11 @@ import SearchCss from "../../styles/search.module.css";
 import { usePostContext } from "../../hooks/usePostContext";
 export default function Search() {
   const search = useRef("");
-  const { setSearch } = usePostContext();
+  const { setSearch, setPage } = usePostContext();
   function hendleSubmit(e) {
     e.preventDefault();
     setSearch(search.current.value);
+    setPage(1);
   }
   return (
     <div className={SearchCss.container}>
@@ -15,8 +16,10 @@ export default function Search() {
           hendleSubmit(e);
         }}
       >
-        <input ref={search} type="text" />
-        <button type="submit">search</button>
+        <input className={SearchCss.inputTag} ref={search} type="text" />
+        <button className={SearchCss.buttonTag} type="submit">
+          search
+        </button>
       </form>
     </div>
   );
