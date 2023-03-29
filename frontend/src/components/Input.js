@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { usePostContext } from "../hooks/usePostContext";
 import { useMyPostsContext } from "../hooks/useMyPostsContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InputCss from "../styles/input.module.css";
 
 export default function Input() {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({ subject: undefined });
   const [error, setError] = useState(null);
   const { state } = useAuthContext();
   const { dispatch: updatePosts } = usePostContext();
   const { dispatch: updateMyPosts } = useMyPostsContext();
-
+  const navigate = useNavigate();
   //POST DATA
   async function hendleSubmit(e) {
     e.preventDefault();
@@ -44,7 +44,7 @@ export default function Input() {
       updatePosts({ type: "addPost", payload: json });
       updateMyPosts({ type: "addMyPost", payload: json });
       setData("");
-      // navigate("/profil");
+      navigate("/profil");
     }
   }
 
@@ -131,6 +131,7 @@ export default function Input() {
                 hendleChange(e);
               }}
             >
+              <option value={undefined}>unchecked</option>
               <option value="matematika">Matematika</option>
               <option value="bosanski">Bosanski</option>
               <option value="fizika">Fizika</option>
@@ -139,9 +140,6 @@ export default function Input() {
               <option value="muzicko">Muzicko</option>
               <option value="likovno">Likovno</option>
               <option value="historija">Historija</option>
-              <option value={undefined} selected="selected">
-                unchecked
-              </option>
             </select>
           </div>
 

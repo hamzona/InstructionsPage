@@ -22,7 +22,6 @@ export function MyPostsContextProvider({ children }) {
     if (!stateUsers.user) {
       return;
     }
-    console.log("radi");
     const setMyPosts = async () => {
       const res = await fetch("http://localhost:4000/api/posts/allMy", {
         method: "GET",
@@ -33,8 +32,7 @@ export function MyPostsContextProvider({ children }) {
       });
 
       const json = await res.json();
-      console.log(json);
-      console.log(res);
+
       if (res.ok) {
         dispatch({ type: "setMyPosts", payload: json });
       }

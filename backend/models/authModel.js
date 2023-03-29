@@ -7,6 +7,9 @@ const Auth = new mongoose.Schema({
     type: String,
     required: true,
   },
+  rate: { type: Number },
+  usersRated: { type: Array },
+  rateScore: { type: Number },
 });
 
 const model = mongoose.model("Auth", Auth);

@@ -10,7 +10,6 @@ const filterPosts = async (req, res, next) => {
       filters[item] = req.query[item];
     }
   });
-  console.log(filters);
 
   req.data = await Post.find({
     $and: [

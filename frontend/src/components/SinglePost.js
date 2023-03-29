@@ -4,13 +4,27 @@ import SinglePostCss from "../styles/singlePost.module.css";
 import InputCommnet from "./InputComment";
 import useCommentContext from "../hooks/useCommentContext";
 import Comment from "./Comment";
+import useProfilContext from "../hooks/useProfilContext";
+import { useNavigate } from "react-router-dom";
 
 export default function SinglePost() {
   const { singlePost, dispatch } = useSinglePostContext();
-
+  const { dispatch: ProfilDispatch } = useProfilContext();
+  const navigate = useNavigate();
   const { comments } = useCommentContext();
   function hendleClick() {
     dispatch({ type: "setSinglePost", payload: null });
+  }
+  async function setProfil() {
+    const res = await fetch(
+      `http://localhost:4000/api/profil?userName=${singlePost.userName}`
+    );
+    const json = await res.json();
+    console.log(json);
+    if (res.ok) {
+      ProfilDispatch({ type: "setProfil", payload: json });
+      navigate("/userProfil");
+    }
   }
   return (
     <div className={SinglePostCss.container}>
@@ -26,7 +40,12 @@ export default function SinglePost() {
       <div className={SinglePostCss.postContainer}>
         <div className={SinglePostCss.header}>
           {singlePost.userName && (
-            <div className={SinglePostCss.userName}>
+            <div
+              className={SinglePostCss.userName}
+              onClick={() => {
+                setProfil();
+              }}
+            >
               user: {singlePost.userName}
             </div>
           )}

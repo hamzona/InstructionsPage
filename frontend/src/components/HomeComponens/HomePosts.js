@@ -1,6 +1,7 @@
 import React from "react";
 import HomePostsCss from "../../styles/homePosts.module.css";
 import useSinglePostContext from "../../hooks/useSinglePostContext";
+
 //import { useNavigate } from "react-router-dom";
 export default function HomePosts({ item }) {
   const { dispatch } = useSinglePostContext();
@@ -9,6 +10,7 @@ export default function HomePosts({ item }) {
     dispatch({ type: "setSinglePost", payload: item });
     // navigate("/singlePost");
   }
+
   return (
     <div
       className={HomePostsCss.container}

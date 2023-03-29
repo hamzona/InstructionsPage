@@ -24,10 +24,10 @@ export function AuthContextProvider({ children }) {
     };
     setting();
   }, []);
-  /*
+
   useEffect(() => {
     console.log(state.user);
-  }, [state]);*/
+  }, [state]);
   return (
     <AuthContext.Provider value={{ state, dispatch }}>
       {children}
