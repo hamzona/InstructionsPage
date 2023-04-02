@@ -25,9 +25,12 @@ export function PostContextProvider({ children }) {
   const [maxPrice, setMaxPrice] = useState(10000);
   const [jobType, setJobType] = useState(null);
   const [error, setError] = useState(null);
+
+  /*SORT */
+  const [sortBy, setSortBy] = useState("");
   useEffect(() => {
     let params = new URLSearchParams(
-      `page=${page}&limit=16&search=${search}&min=${minPrice}&max=${maxPrice}&jobType=${jobType}`
+      `page=${page}&limit=16&search=${search}&min=${minPrice}&max=${maxPrice}&jobType=${jobType}&sortBy=${sortBy}`
     );
     if (!jobType) {
       params.delete("jobType");
@@ -64,7 +67,7 @@ export function PostContextProvider({ children }) {
       }
     };
     getAllPosts();
-  }, [page, search, subjects, minPrice, maxPrice, jobType]);
+  }, [page, search, subjects, minPrice, maxPrice, jobType, sortBy]);
   return (
     <PostContext.Provider
       value={{
@@ -79,6 +82,7 @@ export function PostContextProvider({ children }) {
         setMinPrice,
         setJobType,
         error,
+        setSortBy,
       }}
     >
       {children}

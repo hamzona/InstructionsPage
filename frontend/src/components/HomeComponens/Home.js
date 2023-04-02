@@ -7,6 +7,7 @@ import HomeCss from "../../styles/home.module.css";
 import Pagination from "./Pagination";
 import Filter from "./Filter";
 import Search from "./Search";
+import SortFilter from "./SortFilter";
 function Home() {
   const { state, error } = usePostContext();
   const { state: stateUser } = useAuthContext();
@@ -31,6 +32,7 @@ function Home() {
         )}
       </div>
       <Search />
+      <SortFilter />
       <button
         className={HomeCss.filterBtn}
         onClick={() =>

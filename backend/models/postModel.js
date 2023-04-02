@@ -8,6 +8,10 @@ const Post = new mongoose.Schema({
   subject: { type: String },
   jobType: { type: String },
   userId: { type: String, required: true },
+  rate: { type: Number },
+  usersRated: { type: Array },
+  rateScore: { type: Number },
+  date: { type: Date },
 });
 
 const model = mongoose.model("posts", Post);

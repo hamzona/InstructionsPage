@@ -154,11 +154,9 @@ export default function Input() {
               onChange={(e) => hendleChange(e)}
               defaultValue={undefined}
             >
+              <option value={undefined}>unchecked</option>
               <option value="homework">homework</option>
               <option value="instruction">instruction</option>
-              <option selected="selected" value={undefined}>
-                unchecked
-              </option>
             </select>
           </div>
         </div>

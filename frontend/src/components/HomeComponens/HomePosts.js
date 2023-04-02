@@ -1,7 +1,7 @@
 import React from "react";
 import HomePostsCss from "../../styles/homePosts.module.css";
 import useSinglePostContext from "../../hooks/useSinglePostContext";
-
+import DatePost from "./DatePost";
 //import { useNavigate } from "react-router-dom";
 export default function HomePosts({ item }) {
   const { dispatch } = useSinglePostContext();
@@ -24,6 +24,16 @@ export default function HomePosts({ item }) {
       {item.subject && <div>subject: {item.subject}</div>}
       {item.jobType && <div>job: {item.jobType}</div>}
       {item.price && <div>price: {item.price} KM</div>}
+      {item.rate && (
+        <div className={HomePostsCss.rate}>
+          {Array(parseInt(item.rate))
+            .fill(0)
+            .map((_, index) => {
+              return <div>&#9734;</div>;
+            })}
+        </div>
+      )}
+      <DatePost date={item.date} />
     </div>
   );
 }

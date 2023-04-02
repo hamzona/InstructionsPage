@@ -18,7 +18,6 @@ const rateUser = async (req, res) => {
   const rate = parseInt(req.body.rate);
   try {
     //console.log(userName);
-    console.log(rate);
 
     ME = await Profil.findById({ _id: await req.user.toString() });
 
@@ -28,7 +27,6 @@ const rateUser = async (req, res) => {
     );
     const DataRate =
       (await (data.rateScore + rate)) / (data.usersRated.length + 1);
-    console.log(data.rateScore + rate);
     const userRate = await Profil.findOneAndUpdate(
       { name: userName },
       {

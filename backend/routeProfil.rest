@@ -7,6 +7,6 @@ Content-Type: application/json
 Authorization: Berar eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDIxNTUwMmZmM2E3ZmJiMWRhYWM1ZWUiLCJpYXQiOjE2ODAwODA2OTZ9.AmbQxfAt3ua1mvB5ZFTbtHcl9UW-df4qNhglSpbXa7E
 
 {
-    "rate":1
+    "rate":2
 }
 

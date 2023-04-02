@@ -4,6 +4,7 @@ const Schema = new mongoose.Schema({
   content: { type: String, required: true },
   postId: { type: String, required: true },
   userName: { type: String, required: true },
+  rate: { type: Number },
 });
 const model = mongoose.model("Comments", Schema);
 

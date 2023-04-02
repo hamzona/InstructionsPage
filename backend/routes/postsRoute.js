@@ -5,6 +5,7 @@ const {
   deletePost,
   updatePost,
   getAllMyPosts,
+  ratePost,
 } = require("../controllers/postController");
 
 //middleware
@@ -25,5 +26,6 @@ route.post("/delete", authJwt, deletePost);
 
 //update
 route.patch("/update", authJwt, updatePost);
-
+//rate post
+route.patch("/rate", authJwt, ratePost);
 module.exports = route;

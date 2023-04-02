@@ -7,7 +7,7 @@ Authorization: Berar eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2VkNWMzYW
 }
 
 ###
-GET  http://localhost:4000/api/posts/allPosts?limit=100
+GET  http://localhost:4000/api/posts/allPosts?limit=100&sortBy=date
 ###
 GET   http://localhost:4000/api/posts/allMy
 Authorization: Berar eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2VkNWMzYWVlNmFjOWI0NzU4MDUyOTkiLCJpYXQiOjE2NzY1MDAwMjd9.MLXgnHe9Z3F3QljvsSE7FSo0ABHxP4s5G64t6_2dFAs
@@ -31,6 +31,16 @@ Authorization: Berar eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2VkMDVmNz
 {
     "_id":"63ed5644ef6d765d1208d529",
     "title":"ovo je novi update"
+}
+
+###
+PATCH http://localhost:4000/api/posts/rate
+Content-Type: application/json
+Authorization: Berar eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2VmOTZlY2NiY2YyODY0ZjRkMDczZDkiLCJpYXQiOjE2ODAwODgwNTJ9.isAH6QXV9c_PphVYtCz501quLSCU42fFnuPr2l3ns-I
+
+{
+    "rate":5,
+    "_id":"642489d3b2964422129cafe8"
 }
 
 

@@ -9,6 +9,7 @@ export default function UserProfil() {
   const { state } = useAuthContext();
   const [rate, setRate] = useState(0);
   const [isRateUser, setIsRateUser] = useState(false);
+
   function cancleProfil() {
     dispatch({ type: "setProfil", payload: null });
   }
@@ -34,16 +35,12 @@ export default function UserProfil() {
       await dispatch({ type: "setProfil", payload: json });
     }
   }
-  /*
-  console.log(profilData);
-  console.log(state.user.name);
-*/
+
   function isRated() {
     const d = profilData.usersRated.filter(
       (item) => item.name === state.user.name
     );
 
-    //console.log(profilData.usersRated);
     if (d.length === 0) {
       setIsRateUser(false);
     } else {

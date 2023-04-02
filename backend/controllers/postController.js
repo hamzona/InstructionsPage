@@ -1,4 +1,5 @@
 const Post = require("../models/postModel");
+const Profil = require("../models/authModel");
 
 const addPost = async (req, res) => {
   const { title, price, description, subject, jobType } = req.body;
@@ -16,6 +17,10 @@ const addPost = async (req, res) => {
       subject: subject,
       jobType: jobType,
       userId: req.user,
+      usersRated: [],
+      rateScore: 0,
+      rate: null,
+      date: new Date(),
     });
 
     res.json(newPost);
@@ -23,16 +28,35 @@ const addPost = async (req, res) => {
     res.status(400).json({ error: e.message });
   }
 };
-/*
-const getAllPosts = async (req, res) => {
+
+const ratePost = async (req, res) => {
+  const rate = parseInt(req.body.rate);
+  const { _id } = req.body;
   try {
-    const allPosts = await Post.find({}).sort({ _id: -1 });
-    res.json(allPosts);
+    ME = await Profil.findById({ _id: await req.user.toString() });
+    console.log(rate);
+    const data = await Post.findOne(
+      { _id },
+      { rateScore: 1, _id: 0, usersRated: 1 }
+    );
+    const DataRate =
+      (await (data.rateScore + rate)) / (data.usersRated.length + 1);
+
+    const postRate = await Post.findOneAndUpdate(
+      { _id: _id },
+      {
+        $inc: { rateScore: rate },
+        $push: { usersRated: { name: ME.name, rate: rate } },
+        $set: { rate: DataRate },
+      },
+      { returnOriginal: false }
+    );
+    res.json(postRate);
   } catch (e) {
     res.status(400).json({ error: e.message });
   }
 };
-*/
+
 const getAllMyPosts = async (req, res) => {
   try {
     const myPosts = await Post.find({ userId: req.user }).sort({ _id: -1 });
@@ -70,4 +94,5 @@ module.exports = {
   deletePost,
   updatePost,
   getAllMyPosts,
+  ratePost,
 };
